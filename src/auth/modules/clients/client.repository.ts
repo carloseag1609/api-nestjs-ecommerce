@@ -34,7 +34,7 @@ export class ClientRepository extends Repository<Client> {
   async findByUser(user: User): Promise<Client> {
     const client = await this.findOne({ user });
     if (!client) {
-      throw new NotFoundException(`User not found`);
+      throw new NotFoundException(`User not found asdasd`);
     }
     return client;
   }

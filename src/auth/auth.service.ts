@@ -102,7 +102,10 @@ export class AuthService {
     }
   }
 
-  async updateRole(id: string, role: Role) {
-    await this.usersRepository.updateRole(id, role);
+  async getFullUserInfo(user: User): Promise<Client | Provider> {
+    if (user.role == Role.PROVIDER) {
+      return await this.providerRepository.findByUser(user);
+    }
+    return await this.clientRepository.findByUser(user);
   }
 }

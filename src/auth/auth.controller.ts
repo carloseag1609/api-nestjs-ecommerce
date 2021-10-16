@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Provider, UseGuards } from '@nestjs/common';
 
 // Auth
 import { AuthService } from './auth.service';
@@ -9,37 +9,27 @@ import { GetUser } from './get-user.decorator';
 
 // Entities
 import { User } from './entities/user.entity';
+import { Client } from './modules/clients/entities/client.entity';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
-  // @Post('/signup')
-  // signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<void> {
-  //   return this.authService.signUp(authCredentialsDto);
-  // }
-
-  // @Post('/signin')
-  // signIn(
-  //   @Body() authCredentialsDto: AuthCredentialsDto,
-  // ): Promise<{ accessToken: string }> {
-  //   return this.authService.signIn(authCredentialsDto);
-  // }
 
   @Get()
   async index(): Promise<User[]> {
     return this.authService.getAllUsers();
   }
 
-  @Post('/test')
   @UseGuards(AuthGuard())
+  @Post('/test')
   test(@GetUser() user: User): User {
     console.log(user);
     return user;
   }
 
+  @UseGuards(AuthGuard())
   @Get('/profile')
-  profile(@GetUser() user: User): User {
+  profile(@GetUser() user): Provider | Client {
     return user;
   }
 }

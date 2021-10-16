@@ -7,6 +7,7 @@ import { AddressesModule } from './addresses/addresses.module';
 import { EventsModule } from './events/events.module';
 import { ProvidersModule } from './auth/modules/providers/providers.module';
 import { ClientsModule } from './auth/modules/clients/clients.module';
+import { BusinessesModule } from './businesses/businesses.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ClientsModule } from './auth/modules/clients/clients.module';
     AuthModule,
     AddressesModule,
     EventsModule,
+    BusinessesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

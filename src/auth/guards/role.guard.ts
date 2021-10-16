@@ -5,7 +5,11 @@ import { ROLES_KEY } from '../roles.decorator';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-  constructor(private reflector: Reflector) {}
+  private reflector: Reflector;
+
+  constructor() {
+    this.reflector = new Reflector();
+  }
 
   canActivate(context: ExecutionContext): boolean {
     const roles = this.reflector.get<Role[]>(ROLES_KEY, context.getHandler());
@@ -13,6 +17,6 @@ export class RoleGuard implements CanActivate {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    return roles.some((role: Role) => role === user.role);
+    return roles.some((role: Role) => role === user.user.role);
   }
 }
