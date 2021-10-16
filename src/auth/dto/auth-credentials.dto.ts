@@ -1,6 +1,5 @@
 import {
   IsEmail,
-  IsOptional,
   IsString,
   Matches,
   MaxLength,
@@ -10,10 +9,6 @@ import {
 export class AuthCredentialsDto {
   @IsEmail()
   email: string;
-
-  @IsString()
-  @IsOptional()
-  phone?: string;
 
   @IsString()
   @MinLength(8)

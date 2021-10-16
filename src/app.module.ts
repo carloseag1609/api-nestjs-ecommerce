@@ -5,8 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { EventsModule } from './events/events.module';
-import { ProvidersModule } from './providers/providers.module';
-import { ClientsModule } from './clients/clients.module';
+import { ProvidersModule } from './auth/modules/providers/providers.module';
+import { ClientsModule } from './auth/modules/clients/clients.module';
 
 @Module({
   imports: [
