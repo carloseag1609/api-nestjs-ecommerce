@@ -1,12 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { ClientsService } from "./clients.service";
-import { CreateClientDto } from "./dto/create-client.dto";
-import { UpdateClientDto } from "./dto/update-client.dto";
-import { AddressesService } from "src/addresses/addresses.service";
-import { Client } from "./entities/client.entity";
-import { Role } from "src/auth/enums/role.enum";
-import { AuthService } from "src/auth/auth.service";
-import { AuthCredentialsDto } from "src/auth/dto/auth-credentials.dto";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ClientsService } from './clients.service';
+import { CreateClientDto } from './dto/create-client.dto';
+import { UpdateClientDto } from './dto/update-client.dto';
+import { AddressesService } from 'src/addresses/addresses.service';
+import { Client } from './entities/client.entity';
+import { Role } from 'src/auth/enums/role.enum';
+import { AuthService } from 'src/auth/auth.service';
+import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
 
 @Controller('/auth/clients')
 export class ClientsController {

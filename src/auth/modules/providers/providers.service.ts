@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "src/auth/entities/user.entity";
-import { CreateProviderDto } from "./dto/create-provider.dto";
-import { UpdateProviderDto } from "./dto/update-provider.dto";
-import { Provider } from "./entities/provider.entity";
-import { ProviderRepository } from "./provider.repository";
-import { Address } from "src/addresses/entities/address.entity";
-import { UsersRepository } from "src/auth/users.repository";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { CreateProviderDto } from './dto/create-provider.dto';
+import { UpdateProviderDto } from './dto/update-provider.dto';
+import { Provider } from './entities/provider.entity';
+import { ProviderRepository } from './provider.repository';
+import { Address } from 'src/addresses/entities/address.entity';
+import { UsersRepository } from 'src/auth/users.repository';
 
 @Injectable()
 export class ProvidersService {

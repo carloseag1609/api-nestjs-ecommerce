@@ -1,6 +1,13 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Address } from "src/addresses/entities/address.entity";
-import { User } from "src/auth/entities/user.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Address } from 'src/addresses/entities/address.entity';
+import { User } from 'src/auth/entities/user.entity';
 
 @Entity('providers')
 export class Provider {

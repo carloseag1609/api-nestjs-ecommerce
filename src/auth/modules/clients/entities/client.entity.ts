@@ -1,7 +1,15 @@
-import { AfterInsert, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "../../../entities/user.entity";
-import { Address } from "../../../../addresses/entities/address.entity";
-import { Role } from "src/auth/enums/role.enum";
+import {
+  AfterInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../../../entities/user.entity';
+import { Address } from '../../../../addresses/entities/address.entity';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Entity('clients')
 export class Client {

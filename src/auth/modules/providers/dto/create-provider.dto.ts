@@ -1,5 +1,5 @@
-import { IsBoolean, IsOptional, IsString } from "class-validator";
-import { CreateUserDto } from "src/auth/dto/create-user.dto";
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 
 export class CreateProviderDto extends CreateUserDto {
   @IsString()

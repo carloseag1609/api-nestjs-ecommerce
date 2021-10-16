@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Address } from "src/addresses/entities/address.entity";
-import { UsersRepository } from "src/auth/users.repository";
-import { User } from "../../entities/user.entity";
-import { ClientRepository } from "./client.repository";
-import { CreateClientDto } from "./dto/create-client.dto";
-import { UpdateClientDto } from "./dto/update-client.dto";
-import { Client } from "./entities/client.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Address } from 'src/addresses/entities/address.entity';
+import { UsersRepository } from 'src/auth/users.repository';
+import { User } from '../../entities/user.entity';
+import { ClientRepository } from './client.repository';
+import { CreateClientDto } from './dto/create-client.dto';
+import { UpdateClientDto } from './dto/update-client.dto';
+import { Client } from './entities/client.entity';
 
 @Injectable()
 export class ClientsService {

@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { ProvidersService } from "./providers.service";
-import { CreateProviderDto } from "./dto/create-provider.dto";
-import { AuthService } from "src/auth/auth.service";
-import { AddressesService } from "src/addresses/addresses.service";
-import { Provider } from "./entities/provider.entity";
-import { AuthCredentialsDto } from "src/auth/dto/auth-credentials.dto";
-import { Role } from "src/auth/enums/role.enum";
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { ProvidersService } from './providers.service';
+import { CreateProviderDto } from './dto/create-provider.dto';
+import { AuthService } from 'src/auth/auth.service';
+import { AddressesService } from 'src/addresses/addresses.service';
+import { Provider } from './entities/provider.entity';
+import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('auth/providers')
 export class ProvidersController {

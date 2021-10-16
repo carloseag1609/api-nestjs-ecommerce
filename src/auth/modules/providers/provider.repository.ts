@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
-import { Address } from "src/addresses/entities/address.entity";
-import { User } from "src/auth/entities/user.entity";
-import { EntityRepository, Repository } from "typeorm";
-import { CreateProviderDto } from "./dto/create-provider.dto";
-import { Provider } from "./entities/provider.entity";
+import { NotFoundException } from '@nestjs/common';
+import { Address } from 'src/addresses/entities/address.entity';
+import { User } from 'src/auth/entities/user.entity';
+import { EntityRepository, Repository } from 'typeorm';
+import { CreateProviderDto } from './dto/create-provider.dto';
+import { Provider } from './entities/provider.entity';
 
 @EntityRepository(Provider)
 export class ProviderRepository extends Repository<Provider> {

@@ -1,8 +1,8 @@
-import { EntityRepository, Repository } from "typeorm";
-import { Address } from "src/addresses/entities/address.entity";
-import { Client } from "./entities/client.entity";
-import { User } from "../../entities/user.entity";
-import { NotFoundException } from "@nestjs/common";
+import { EntityRepository, Repository } from 'typeorm';
+import { Address } from 'src/addresses/entities/address.entity';
+import { Client } from './entities/client.entity';
+import { User } from '../../entities/user.entity';
+import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Client)
 export class ClientRepository extends Repository<Client> {
