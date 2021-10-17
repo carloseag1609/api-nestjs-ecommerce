@@ -8,6 +8,9 @@ import { EventsModule } from './events/events.module';
 import { ProvidersModule } from './auth/modules/providers/providers.module';
 import { ClientsModule } from './auth/modules/clients/clients.module';
 import { BusinessesModule } from './businesses/businesses.module';
+import { ProductsModule } from './products/products.module';
+import { SearchModule } from './search/search.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -27,6 +30,9 @@ import { BusinessesModule } from './businesses/businesses.module';
     AddressesModule,
     EventsModule,
     BusinessesModule,
+    ProductsModule,
+    SearchModule,
+    ServicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

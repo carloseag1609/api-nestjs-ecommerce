@@ -1,7 +1,11 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsUUID } from 'class-validator';
 
 export class GetBusinessesFilterDto {
-  @IsString()
+  @IsUUID()
   @IsOptional()
-  category: string;
+  categoryId: string;
+
+  @IsUUID()
+  @IsOptional()
+  regionId: string;
 }

@@ -7,6 +7,8 @@ import { BusinessRepository } from './business.repository';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from 'src/auth/auth.module';
 import { CategoryRepository } from './modules/categories/categories.repository';
+import { ProvidersModule } from 'src/auth/modules/providers/providers.module';
+import { RegionsModule } from 'src/addresses/modules/regions/regions.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { CategoryRepository } from './modules/categories/categories.repository';
     TypeOrmModule.forFeature([BusinessRepository, CategoryRepository]),
     AuthModule,
     CategoriesModule,
+    ProvidersModule,
+    RegionsModule,
   ],
   controllers: [BusinessesController],
   providers: [BusinessesService],

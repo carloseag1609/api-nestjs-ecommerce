@@ -8,6 +8,8 @@ import {
 } from 'typeorm';
 import { Address } from 'src/addresses/entities/address.entity';
 import { User } from 'src/auth/entities/user.entity';
+import { Business } from 'src/businesses/entities/business.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity('providers')
 export class Provider {

@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ProvidersService } from './providers.service';
 import { CreateProviderDto } from './dto/create-provider.dto';
 import { AuthService } from 'src/auth/auth.service';
@@ -6,6 +14,10 @@ import { AddressesService } from 'src/addresses/addresses.service';
 import { Provider } from './entities/provider.entity';
 import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
 import { Role } from 'src/auth/enums/role.enum';
+import { AuthGuard } from '@nestjs/passport';
+import { RoleGuard } from 'src/auth/guards/role.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { GetUser } from 'src/auth/get-user.decorator';
 
 @Controller('auth/providers')
 export class ProvidersController {
@@ -69,6 +81,13 @@ export class ProvidersController {
     };
   }
 
+  @Roles(Role.PROVIDER)
+  @UseGuards(AuthGuard(), new RoleGuard())
+  @Get('/my-products')
+  getProducts(@GetUser() provider: Provider) {
+    return this.providersService.getProviderProducts(provider);
+  }
+
   @Get()
   findAll() {
     return this.providersService.findAll();
@@ -78,11 +97,6 @@ export class ProvidersController {
   findOne(@Param('id') id: string) {
     return this.providersService.findOne(+id);
   }
-
-  // @Patch(':id/role')
-  // update(@Param('id') id: string, @Body('role') patchRoleDto: PatchRoleDto) {
-  //   return this.providersService.patchRole(id, patchRoleDto.role);
-  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

@@ -1,6 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Address } from 'src/addresses/entities/address.entity';
 import { User } from 'src/auth/entities/user.entity';
+import { Business } from 'src/businesses/entities/business.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateProviderDto } from './dto/create-provider.dto';
 import { Provider } from './entities/provider.entity';
@@ -46,6 +47,8 @@ export class ProviderRepository extends Repository<Provider> {
     }
     return provider;
   }
+
+  async getProducts(provider: Provider) {}
 
   async findAll(): Promise<Provider[]> {
     return await this.find();

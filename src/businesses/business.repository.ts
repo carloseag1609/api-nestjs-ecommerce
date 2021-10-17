@@ -6,6 +6,7 @@ import { Category } from './modules/categories/entities/category.entity';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryRepository } from './modules/categories/categories.repository';
+import { Region } from 'src/addresses/modules/regions/entities/region.entity';
 
 @EntityRepository(Business)
 export class BusinessRepository extends Repository<Business> {
@@ -42,10 +43,19 @@ export class BusinessRepository extends Repository<Business> {
     return business;
   }
 
-  async getBusinessesByCategory(category: Category): Promise<Category[]> {
+  async getBusinessesByCategory(category: Category): Promise<Business[]> {
     const businesses = await this.find({
       category: {
         id: category.id,
+      },
+    });
+    return businesses;
+  }
+
+  async getBusinessByCategory(category: Category): Promise<Business[]> {
+    const businesses = await this.find({
+      where: {
+        category,
       },
     });
     return businesses;

@@ -7,6 +7,7 @@ import { Provider } from './entities/provider.entity';
 import { ProviderRepository } from './provider.repository';
 import { Address } from 'src/addresses/entities/address.entity';
 import { UsersRepository } from 'src/auth/users.repository';
+import { ProductsService } from 'src/products/products.service';
 
 @Injectable()
 export class ProvidersService {
@@ -15,6 +16,7 @@ export class ProvidersService {
     private readonly providerRepository: ProviderRepository,
     @InjectRepository(UsersRepository)
     private readonly usersRepository: UsersRepository,
+    private readonly productsService: ProductsService,
   ) {}
 
   async create(
@@ -29,6 +31,10 @@ export class ProvidersService {
     );
     delete provider.user.password;
     return provider;
+  }
+
+  async getProviderProducts(provider: Provider) {
+    return this.productsService.getProviderProducts(provider);
   }
 
   findAll() {

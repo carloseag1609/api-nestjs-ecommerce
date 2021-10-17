@@ -1,3 +1,4 @@
+import { Address } from 'src/addresses/entities/address.entity';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
 import {
   Column,

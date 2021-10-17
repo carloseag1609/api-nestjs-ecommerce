@@ -35,13 +35,8 @@ export class BusinessesController {
   }
 
   @Get()
-  findAll(@Query() getBusinessesFilter: GetBusinessesFilterDto) {
-    // is there's any filter defined, return tasks filtered
-    if (Object.keys(getBusinessesFilter).length) {
-      return this.businessesService.getBusinessFiltered(getBusinessesFilter);
-    } else {
-      return this.businessesService.getAllBusiness();
-    }
+  findAll() {
+    return this.businessesService.getAllBusiness();
   }
 
   @Get(':id')
