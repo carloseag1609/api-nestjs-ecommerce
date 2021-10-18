@@ -6,6 +6,7 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
 import { Roles } from 'src/auth/roles.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
+import { SetShippingPriceDto } from './dto/set-shipping-price.dto';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -35,5 +36,14 @@ export class ProductsController {
     @GetUser() provider: Provider,
   ) {
     return this.productsService.create(createProductDto, provider);
+  }
+
+  @Post('/shipping/:productId')
+  setShippingPrice(
+    @Param('productId') productId: string,
+    @Body() setShippingPriceDto: SetShippingPriceDto,
+  ) {
+    const { price, regionId } = setShippingPriceDto;
+    return this.productsService.setShippingPrice(productId, regionId, price);
   }
 }

@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Region } from 'src/addresses/modules/regions/entities/region.entity';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -45,5 +45,13 @@ export class ProductRepository extends Repository<Product> {
       .leftJoinAndSelect('address.region', 'region')
       .where('address.secondAddress = :secondAddress', { secondAddress })
       .getMany();
+  }
+
+  async getProductById(id: string) {
+    const product = await this.findOne(id);
+    if (!product) {
+      throw new NotFoundException(`Product not found`);
+    }
+    return product;
   }
 }
