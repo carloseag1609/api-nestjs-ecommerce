@@ -1,5 +1,13 @@
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ServiceShipping } from '../modules/service-shipping/entities/service-shipping.entity';
 
 @Entity('services')
 export class Service {
@@ -23,4 +31,10 @@ export class Service {
 
   @ManyToOne(() => Provider, (provider) => provider.id, { eager: true })
   provider: Provider;
+
+  @ManyToMany(() => ServiceShipping, {
+    eager: true,
+  })
+  @JoinTable()
+  shippings: ServiceShipping[];
 }
