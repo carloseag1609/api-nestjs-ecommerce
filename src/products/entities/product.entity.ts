@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProductShipping } from '../modules/products-shipping/entities/product-shipping.entity';
+import { Question } from '../modules/questions/entities/question.entity';
 
 @Entity('products')
 export class Product {
@@ -33,12 +34,22 @@ export class Product {
   @Column()
   price: number;
 
-  @ManyToOne(() => Provider, (provider) => provider.id, { eager: true })
+  @ManyToOne(() => Provider, (provider) => provider.id, {
+    eager: true,
+    onDelete: 'SET NULL',
+  })
   provider: Provider;
 
   @ManyToMany(() => ProductShipping, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   @JoinTable()
   shippings: ProductShipping[];
+
+  @OneToMany(() => Question, (question) => question.product, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  questions: Question[];
 }

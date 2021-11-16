@@ -46,4 +46,8 @@ export class Provider {
     onDelete: 'CASCADE',
   })
   address: Address;
+
+  @OneToOne(() => Business)
+  @JoinColumn()
+  business: Business;
 }

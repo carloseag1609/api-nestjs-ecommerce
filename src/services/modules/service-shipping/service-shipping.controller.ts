@@ -3,5 +3,7 @@ import { ServiceShippingService } from './service-shipping.service';
 
 @Controller('service-shipping')
 export class ServiceShippingController {
-  constructor(private readonly serviceShippingService: ServiceShippingService) {}
+  constructor(
+    private readonly serviceShippingService: ServiceShippingService,
+  ) {}
 }

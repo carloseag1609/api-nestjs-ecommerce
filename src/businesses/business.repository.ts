@@ -7,6 +7,7 @@ import { ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryRepository } from './modules/categories/categories.repository';
 import { Region } from 'src/addresses/modules/regions/entities/region.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @EntityRepository(Business)
 export class BusinessRepository extends Repository<Business> {
@@ -60,4 +61,12 @@ export class BusinessRepository extends Repository<Business> {
     });
     return businesses;
   }
+
+  // async addProduct(businessId: string, product: Product) {
+  //   const business = await this.getBusinessById(businessId);
+  //   console.log(business);
+  //   console.log(product);
+  //   business.products.push(product);
+  //   await this.save(business);
+  // }
 }

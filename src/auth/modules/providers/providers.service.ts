@@ -37,19 +37,26 @@ export class ProvidersService {
     return this.productsService.getProviderProducts(provider);
   }
 
-  findAll() {
-    return this.providerRepository.findOne();
+  async findAll() {
+    let providers = await this.providerRepository.find({
+      relations: ['business'],
+    });
+    providers = providers.map((provider) => {
+      provider.business && delete provider.business.provider.user.password;
+      return provider;
+    });
+    return providers;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} provider`;
+  findOne(id: string) {
+    return this.providerRepository.findOneById(id);
   }
 
-  update(id: number, updateProviderDto: UpdateProviderDto) {
+  update(id: string, updateProviderDto: UpdateProviderDto) {
     return `This action updates a #${id} provider`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} provider`;
   }
 }

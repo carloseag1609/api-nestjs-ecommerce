@@ -1,4 +1,5 @@
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
+import { Question } from 'src/services/modules/questions/entities/question.entity';
 import {
   Column,
   Entity,
@@ -37,4 +38,7 @@ export class Service {
   })
   @JoinTable()
   shippings: ServiceShipping[];
+
+  @ManyToOne(() => Question, (question) => question.id, { eager: true })
+  questions: Question[];
 }

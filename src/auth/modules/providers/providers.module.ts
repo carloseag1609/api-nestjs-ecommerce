@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ProvidersService } from './providers.service';
 import { ProvidersController } from './providers.controller';
 import { AddressesModule } from 'src/addresses/addresses.module';
@@ -13,11 +13,11 @@ import { ProductsModule } from 'src/products/products.module';
   controllers: [ProvidersController],
   providers: [ProvidersService],
   imports: [
-    AuthModule,
-    AddressesModule,
-    ProductsModule,
     TypeOrmModule.forFeature([ProviderRepository, UsersRepository]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
+    AuthModule,
+    AddressesModule,
+    forwardRef(() => ProductsModule),
   ],
   exports: [ProvidersModule, ProvidersService],
 })

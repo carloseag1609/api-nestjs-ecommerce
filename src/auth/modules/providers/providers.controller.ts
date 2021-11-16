@@ -95,11 +95,11 @@ export class ProvidersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.providersService.findOne(+id);
+    return this.providersService.findOne(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.providersService.remove(+id);
+    return this.providersService.remove(id);
   }
 }

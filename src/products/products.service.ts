@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Region } from 'src/addresses/modules/regions/entities/region.entity';
 import { RegionsService } from 'src/addresses/modules/regions/regions.service';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
+import { BusinessesService } from 'src/businesses/businesses.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { SetShippingPriceDto } from './dto/set-shipping-price.dto';
 import { Product } from './entities/product.entity';
@@ -16,10 +17,19 @@ export class ProductsService {
     private readonly productRepository: ProductRepository,
     private readonly regionsService: RegionsService,
     private readonly productsShippingService: ProductsShippingService,
+    private readonly businessesService: BusinessesService,
   ) {}
 
   async getAll() {
     return this.productRepository.find();
+  }
+
+  async findByWord(word: string): Promise<Product[]> {
+    return this.productRepository.findByWord(word);
+  }
+
+  async getById(id: string) {
+    return this.productRepository.getProductById(id);
   }
 
   async getProviderProducts(provider: Provider) {
@@ -39,7 +49,12 @@ export class ProductsService {
     createProductDto: CreateProductDto,
     provider: Provider,
   ): Promise<Product> {
-    return this.productRepository.createProduct(createProductDto, provider);
+    const product = await this.productRepository.createProduct(
+      createProductDto,
+      provider,
+    );
+    // await this.businessesService.addProduct(provider.business.id, product);
+    return product;
   }
 
   async setShippingPrice(productId: string, regionId: string, price: number) {

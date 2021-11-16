@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { BusinessesService } from './businesses.service';
 import { BusinessesController } from './businesses.controller';
 import { CategoriesModule } from './modules/categories/categories.module';
@@ -7,19 +7,25 @@ import { BusinessRepository } from './business.repository';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from 'src/auth/auth.module';
 import { CategoryRepository } from './modules/categories/categories.repository';
-import { ProvidersModule } from 'src/auth/modules/providers/providers.module';
 import { RegionsModule } from 'src/addresses/modules/regions/regions.module';
+import { ProvidersModule } from 'src/auth/modules/providers/providers.module';
+import { ProviderRepository } from 'src/auth/modules/providers/provider.repository';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    TypeOrmModule.forFeature([BusinessRepository, CategoryRepository]),
+    TypeOrmModule.forFeature([
+      BusinessRepository,
+      CategoryRepository,
+      ProviderRepository,
+    ]),
+    forwardRef(() => ProvidersModule),
     AuthModule,
     CategoriesModule,
-    ProvidersModule,
     RegionsModule,
   ],
   controllers: [BusinessesController],
   providers: [BusinessesService],
+  exports: [BusinessesModule, BusinessesService],
 })
 export class BusinessesModule {}

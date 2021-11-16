@@ -1,10 +1,13 @@
 import { Address } from 'src/addresses/entities/address.entity';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
+import { Product } from 'src/products/entities/product.entity';
+import { Service } from 'src/services/entities/service.entity';
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';

@@ -16,6 +16,7 @@ export class ServiceShippingRepository extends Repository<ServiceShipping> {
       price,
     });
     await this.save(shipping);
+    console.log(shipping);
     return shipping;
   }
 }
