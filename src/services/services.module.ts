@@ -6,6 +6,8 @@ import { ServiceRepository } from './service.repository';
 import { AuthModule } from 'src/auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { RegionsModule } from 'src/addresses/modules/regions/regions.module';
+import { ServiceShippingModule } from './modules/service-shipping/service-shipping.module';
+import { QuestionsModule } from './modules/questions/questions.module';
 
 @Module({
   controllers: [ServicesController],
@@ -15,6 +17,8 @@ import { RegionsModule } from 'src/addresses/modules/regions/regions.module';
     TypeOrmModule.forFeature([ServiceRepository]),
     AuthModule,
     RegionsModule,
+    ServiceShippingModule,
+    QuestionsModule,
   ],
   exports: [ServicesModule, ServicesService],
 })

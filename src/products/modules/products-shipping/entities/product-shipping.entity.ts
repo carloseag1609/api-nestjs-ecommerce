@@ -7,10 +7,12 @@ export class ProductShipping {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Product, (product) => product.id)
+  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'SET NULL' })
   product: Product;
 
-  @ManyToOne(() => Region, (region) => region.id, { eager: true })
+  @ManyToOne(() => Region, (region) => region.id, {
+    eager: true,
+  })
   region: Region;
 
   @Column()

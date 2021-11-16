@@ -1,7 +1,7 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Region } from 'src/addresses/modules/regions/entities/region.entity';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './entities/product.entity';
 
@@ -12,10 +12,14 @@ export class ProductRepository extends Repository<Product> {
     provider: Provider,
   ): Promise<Product> {
     try {
-      const product = await this.create({ ...createProductDto, provider });
+      const product = await this.create({
+        ...createProductDto,
+        provider,
+      });
       await this.save(product);
       return product;
     } catch (error) {
+      console.log(error);
       throw new ConflictException(error.sqlMessage);
     }
   }
@@ -53,5 +57,12 @@ export class ProductRepository extends Repository<Product> {
       throw new NotFoundException(`Product not found`);
     }
     return product;
+  }
+
+  async findByWord(word: string): Promise<Product[]> {
+    const products = await this.find({
+      where: [{ name: Like(`${word}%`) }, { description: Like(`${word}%`) }],
+    });
+    return products;
   }
 }

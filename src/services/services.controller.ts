@@ -5,6 +5,7 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
 import { Roles } from 'src/auth/roles.decorator';
+import { SetShippingPriceDto } from 'src/products/dto/set-shipping-price.dto';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { ServicesService } from './services.service';
 
@@ -30,5 +31,14 @@ export class ServicesController {
   @Get('/secondAddress/:name')
   getProductsBySecondAddress(@Param('name') name: string) {
     return this.servicesService.getServicesBySecondAddress(name);
+  }
+
+  @Post('/shipping/:serviceId')
+  setShippingPrice(
+    @Param('serviceId') serviceId: string,
+    @Body() setShippingPriceDto: SetShippingPriceDto,
+  ) {
+    const { price, regionId } = setShippingPriceDto;
+    return this.servicesService.setShippingPrice(serviceId, regionId, price);
   }
 }

@@ -41,7 +41,7 @@ export class ProviderRepository extends Repository<Provider> {
   }
 
   async findByUser(user: User): Promise<Provider> {
-    const provider = await this.findOne({ user });
+    const provider = await this.findOne({ user }, { relations: ['business'] });
     if (!provider) {
       throw new NotFoundException(`User not found asdasd`);
     }
@@ -52,5 +52,13 @@ export class ProviderRepository extends Repository<Provider> {
 
   async findAll(): Promise<Provider[]> {
     return await this.find();
+  }
+
+  async findOneById(id: string) {
+    const provider = await this.findOne(id);
+    if (!provider) {
+      throw new NotFoundException(`Provider not found`);
+    }
+    return provider;
   }
 }

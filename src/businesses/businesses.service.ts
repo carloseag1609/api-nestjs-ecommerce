@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegionsService } from 'src/addresses/modules/regions/regions.service';
 import { Provider } from 'src/auth/modules/providers/entities/provider.entity';
+import { ProviderRepository } from 'src/auth/modules/providers/provider.repository';
 import { ProvidersService } from 'src/auth/modules/providers/providers.service';
+import { Product } from 'src/products/entities/product.entity';
 import { BusinessRepository } from './business.repository';
 import { CreateBusinessDto } from './dto/create-business.dto';
 import { GetBusinessesFilterDto } from './dto/get-businesses-filter.dto';
@@ -15,9 +17,9 @@ export class BusinessesService {
   constructor(
     @InjectRepository(BusinessRepository)
     private readonly businessRepository: BusinessRepository,
+    @InjectRepository(ProviderRepository)
+    private readonly providerRepository: ProviderRepository,
     private readonly categoriesService: CategoriesService,
-    private readonly providersService: ProvidersService,
-    private readonly regionsService: RegionsService,
   ) {}
 
   async create(
@@ -32,6 +34,10 @@ export class BusinessesService {
       provider,
       category,
     );
+
+    provider.business = business;
+
+    await this.providerRepository.save(provider);
 
     return business;
   }
@@ -73,4 +79,8 @@ export class BusinessesService {
   remove(id: number) {
     return `This action removes a #${id} business`;
   }
+
+  // addProduct(businessId: string, product: Product) {
+  //   return this.businessRepository.addProduct(businessId, product);
+  // }
 }
