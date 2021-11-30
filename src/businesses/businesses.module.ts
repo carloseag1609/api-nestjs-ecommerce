@@ -10,6 +10,7 @@ import { CategoryRepository } from './modules/categories/categories.repository';
 import { RegionsModule } from 'src/addresses/modules/regions/regions.module';
 import { ProvidersModule } from 'src/auth/modules/providers/providers.module';
 import { ProviderRepository } from 'src/auth/modules/providers/provider.repository';
+import { ShippingsModule } from './modules/shippings/shippings.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ProviderRepository } from 'src/auth/modules/providers/provider.reposito
     AuthModule,
     CategoriesModule,
     RegionsModule,
+    ShippingsModule,
   ],
   controllers: [BusinessesController],
   providers: [BusinessesService],

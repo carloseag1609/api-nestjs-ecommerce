@@ -24,6 +24,20 @@ export class ProductRepository extends Repository<Product> {
     }
   }
 
+  async updateProduct(
+    id: string,
+    createProductDto: CreateProductDto,
+  ): Promise<Product> {
+    const product = await this.getProductById(id);
+    product.name = createProductDto.name;
+    product.description = createProductDto.description;
+    product.thumbnail = createProductDto.thumbnail;
+    product.price = createProductDto.price;
+    product.stock = createProductDto.stock;
+    await this.save(product);
+    return await this.getProductById(id);
+  }
+
   async getProviderProducts(provider: Provider): Promise<Product[]> {
     const products = await this.find({
       where: {

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/auth/enums/role.enum';
 import { GetUser } from 'src/auth/get-user.decorator';
@@ -45,5 +54,23 @@ export class ProductsController {
   ) {
     const { price, regionId } = setShippingPriceDto;
     return this.productsService.setShippingPrice(productId, regionId, price);
+  }
+
+  @Delete('/:id')
+  deleteProductById(@Param('id') id: string) {
+    return this.productsService.deleteById(id);
+  }
+
+  @Put('/:id')
+  updateProduct(
+    @Param('id') id: string,
+    @Body() updateProductDto: CreateProductDto,
+  ) {
+    return this.productsService.update(id, updateProductDto);
+  }
+
+  @Get('/:id')
+  getProductById(@Param('id') id: string) {
+    return this.productsService.getById(id);
   }
 }

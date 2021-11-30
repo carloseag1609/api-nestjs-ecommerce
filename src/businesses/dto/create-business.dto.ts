@@ -9,4 +9,10 @@ export class CreateBusinessDto {
 
   @IsString()
   logo: string;
+
+  @IsString()
+  envioColima: string;
+
+  @IsString()
+  envioVdeA: string;
 }

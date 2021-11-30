@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Provider, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Provider,
+  UseGuards,
+} from '@nestjs/common';
 
 // Auth
 import { AuthService } from './auth.service';
@@ -10,6 +17,7 @@ import { GetUser } from './get-user.decorator';
 // Entities
 import { User } from './entities/user.entity';
 import { Client } from './modules/clients/entities/client.entity';
+import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -18,6 +26,11 @@ export class AuthController {
   @Get()
   async index(): Promise<User[]> {
     return this.authService.getAllUsers();
+  }
+
+  @Post('/login')
+  async login(@Body() authCredentialsDto: AuthCredentialsDto) {
+    return this.authService.signIn(authCredentialsDto);
   }
 
   @UseGuards(AuthGuard())

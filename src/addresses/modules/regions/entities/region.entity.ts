@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Shipping } from 'src/businesses/modules/shippings/entities/shipping.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('regions')
 export class Region {
@@ -7,4 +8,7 @@ export class Region {
 
   @Column({ unique: true })
   name: string;
+
+  @OneToMany(() => Shipping, (shipping) => shipping.region)
+  shippings: Shipping[];
 }
