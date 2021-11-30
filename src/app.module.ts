@@ -20,7 +20,7 @@ import { ServicesModule } from './services/services.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'basic_auth',
+      database: 'proyecto_modulo',
       autoLoadEntities: true,
       synchronize: true,
     }),

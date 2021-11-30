@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -19,7 +20,7 @@ export class Provider {
   @Column()
   fullname: string;
 
-  @Column()
+  @Column({ default: true })
   validated: boolean;
 
   @Column({ default: false })

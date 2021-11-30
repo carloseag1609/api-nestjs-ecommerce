@@ -12,6 +12,7 @@ import { Client } from './modules/clients/entities/client.entity';
 import { Provider } from './modules/providers/entities/provider.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Role } from './enums/role.enum';
+import { Roles } from './roles.decorator';
 
 @Injectable()
 export class AuthService {
@@ -33,9 +34,14 @@ export class AuthService {
     return this.usersRepository.createUser(createUserDto);
   }
 
-  async signIn(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{
+    accessToken: string;
+    userId: string;
+    email: string;
+    role: Role;
+    client?: Client;
+    provider?: Provider;
+  }> {
     const { email, password } = authCredentialsDto;
     // check if user exists
     const user = await this.usersRepository.findOne({ email });
@@ -46,9 +52,29 @@ export class AuthService {
         role: user.role,
       }; // payload in the token
       const accessToken: string = await this.jwtService.sign(payload);
-      return {
-        accessToken,
-      };
+      if (user.role === 'CLIENT') {
+        const client: Client = await this.clientRepository.findByUser(user);
+        return {
+          accessToken,
+          userId: user.id,
+          email,
+          role: user.role,
+          client: client,
+          provider: null,
+        };
+      } else {
+        const provider: Provider = await this.providerRepository.findByUser(
+          user,
+        );
+        return {
+          accessToken,
+          userId: user.id,
+          email,
+          role: user.role,
+          client: null,
+          provider,
+        };
+      }
     } else {
       throw new UnauthorizedException('Please check your login credentials');
     }

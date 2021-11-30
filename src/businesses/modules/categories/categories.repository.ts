@@ -14,6 +14,7 @@ export class CategoryRepository extends Repository<Category> {
       await this.save(category);
       return category;
     } catch (error) {
+      console.log(error);
       if (error.errcode === 1062) {
         throw new ConflictException(`Category already exists`);
       }

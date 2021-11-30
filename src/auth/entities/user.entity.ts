@@ -17,4 +17,10 @@ export class User {
 
   @Column({ default: Role.USER })
   role: Role;
+
+  @Column({
+    default:
+      'http://www.caribbeangamezone.com/wp-content/uploads/2018/03/avatar-placeholder.png',
+  })
+  photo: string;
 }

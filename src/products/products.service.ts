@@ -32,6 +32,12 @@ export class ProductsService {
     return this.productRepository.getProductById(id);
   }
 
+  async deleteById(id: string) {
+    return await this.productRepository.delete({
+      id,
+    });
+  }
+
   async getProviderProducts(provider: Provider) {
     return this.productRepository.getProviderProducts(provider);
   }
@@ -54,6 +60,17 @@ export class ProductsService {
       provider,
     );
     // await this.businessesService.addProduct(provider.business.id, product);
+    return product;
+  }
+
+  async update(
+    id: string,
+    createProductDto: CreateProductDto,
+  ): Promise<Product> {
+    const product = await this.productRepository.updateProduct(
+      id,
+      createProductDto,
+    );
     return product;
   }
 

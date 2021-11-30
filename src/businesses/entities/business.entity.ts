@@ -12,6 +12,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from '../modules/categories/entities/category.entity';
+import { Shipping } from '../modules/shippings/entities/shipping.entity';
 
 @Entity('businesses')
 export class Business {
@@ -26,6 +27,15 @@ export class Business {
     eager: true,
   })
   category: Category;
+
+  @OneToMany(() => Shipping, (shipping) => shipping.business, { eager: true })
+  shippings: Shipping[];
+
+  @Column()
+  envioColima: string;
+
+  @Column()
+  envioVdeA: string;
 
   @Column()
   name: string;
